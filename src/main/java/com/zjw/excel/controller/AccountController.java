@@ -32,7 +32,7 @@ public class AccountController  {
     @Autowired
     private AccountService accountService;
 
-    @ApiOperation(value = "导出优惠券列表", notes = "")
+    @ApiOperation(value = "导出用户数据", notes = "")
     @ResponseBody
     @GetMapping("/old/export")
     public Result<Object> oldExport(HttpServletResponse response) {
