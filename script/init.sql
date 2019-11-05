@@ -10,18 +10,18 @@ CREATE TABLE `app_account` (
   `update_pwd` bit(1) DEFAULT b'0' COMMENT '是否修改过密码 0未修改 1:已修改',
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx_mobile` (`mobile`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=1000001 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 
 
-CREATE DEFINER=`root`@`%` PROCEDURE `insertData`()
+CREATE  PROCEDURE `insertData`()
 BEGIN
 
 DECLARE i INT DEFAULT 1;
 
 while i<1000000
 do
-INSERT INTO `zerer`.`app_account` (`mobile`, `password`, `salt`, `master`, `activated`, `create_time`, `update_time`, `update_pwd`) VALUES ( i, '123456', '111', b'1', b'1', '2019-11-05 16:17:33', '2019-11-05 16:17:37', b'0');
+INSERT INTO app_account (`mobile`, `password`, `salt`, `master`, `activated`, `create_time`, `update_time`, `update_pwd`) VALUES ( i, '123456', '111', b'1', b'1', '2019-11-05 16:17:33', '2019-11-05 16:17:37', b'0');
 set i = i+1;
 end while;
 commit;
