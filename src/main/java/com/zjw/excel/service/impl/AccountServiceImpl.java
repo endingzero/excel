@@ -31,7 +31,10 @@ public class AccountServiceImpl extends ServiceImpl<AccountDao, AccountDO> imple
 
     @Override
     public ExcelData oldExport() {
+        long begin = System.currentTimeMillis();
         List<AccountDto> accountDtoList = baseMapper.export();
+        long end = System.currentTimeMillis();
+        log.info("旧查询消耗时间:"+(end-begin) + "ms");
         ExcelData excelData = new ExcelData();
         List<String> titles = new ArrayList<>();
         titles.add("手机");

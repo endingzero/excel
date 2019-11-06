@@ -1,6 +1,5 @@
 package com.zjw.excel.jdbc;
 
-import lombok.extern.log4j.Log4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,6 +20,7 @@ public class QueryCompare {
      * @throws SQLException
      */
     public static void selectNormal() throws SQLException {
+        //-Xms32m -Xmx32m
         Connection connection = DriverManager.getConnection("jdbc:mysql://192.168.1.245:3306/test", "erp", "123456");
         PreparedStatement statement = connection.prepareStatement("select * from app_account where activated = 1",ResultSet.TYPE_FORWARD_ONLY,ResultSet.CONCUR_READ_ONLY);
         ResultSet resultSet = statement.executeQuery();

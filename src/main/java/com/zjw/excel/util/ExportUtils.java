@@ -1,6 +1,8 @@
 package com.zjw.excel.util;
 
+import com.zjw.excel.dto.AccountDto;
 import com.zjw.excel.excel.ExcelData;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
@@ -15,6 +17,7 @@ import java.io.OutputStream;
 import java.net.URLEncoder;
 import java.util.List;
 
+@Slf4j
 public class ExportUtils {
 
     public static void exportExcel(HttpServletResponse response, String fileName, ExcelData... excelData) {
@@ -39,7 +42,10 @@ public class ExportUtils {
                 writeExcel(wb, sheet, data);
 
             }
+            long begin = System.currentTimeMillis();
             wb.write(out);
+            long end = System.currentTimeMillis();
+            log.info("写出消耗时间:"+(end-begin) + "ms");
         } finally {
             wb.close();
         }
@@ -48,11 +54,16 @@ public class ExportUtils {
     private static void writeExcel(XSSFWorkbook wb, Sheet sheet, ExcelData data) {
 
         int rowIndex = 0;
-
+        long begin = System.currentTimeMillis();
         rowIndex = writeTitlesToExcel(wb, sheet, data.getTitles());
+        long firstEnd = System.currentTimeMillis();
+        log.info("写头部消耗时间:"+(firstEnd-begin) + "ms");
         writeRowsToExcel(wb, sheet, data.getRows(), rowIndex);
+        long secondEnd = System.currentTimeMillis();
+        log.info("写行消耗时间:"+(secondEnd-firstEnd) + "ms");
         autoSizeColumns(sheet, data.getTitles().size() + 1);
-
+        long thirdEnd = System.currentTimeMillis();
+        log.info("设置宽度消耗时间:"+(thirdEnd-secondEnd) + "ms");
     }
 
     private static int writeTitlesToExcel(XSSFWorkbook wb, Sheet sheet, List<String> titles) {
