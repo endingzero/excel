@@ -23,6 +23,10 @@ import java.util.function.Supplier;
 @Slf4j
 public class ExcelResultHandler<T> implements ResultHandler<T>, Supplier<ResponseEntity<FileSystemResource>> {
 
+    public void setDataCache(List<T> dataCache) {
+        this.dataCache = dataCache;
+    }
+
     private List<T> dataCache;
 
     private ExcelDataConverter<T> dataConverter;
@@ -53,6 +57,8 @@ public class ExcelResultHandler<T> implements ResultHandler<T>, Supplier<Respons
         this.dataWriter.setSheetName(dataConverter.getSheetName());
     }
 
+
+
     private ExcelResultHandler() {
     }
 
@@ -81,7 +87,7 @@ public class ExcelResultHandler<T> implements ResultHandler<T>, Supplier<Respons
         }
     }
 
-    private void handlerData() {
+    public void handlerData() {
         dataCache.forEach(v -> {
             // 将结果进行转换
             List<String> converterAfterData = dataConverter.apply(v);

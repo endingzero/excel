@@ -37,7 +37,6 @@ public class QueryCompare {
         Connection connection = DriverManager.getConnection("jdbc:mysql://192.168.1.245:3306/test", "erp", "123456");
         PreparedStatement statement = connection.prepareStatement("select * from app_account where activated = 1",ResultSet.TYPE_FORWARD_ONLY,ResultSet.CONCUR_READ_ONLY);
         statement.setFetchSize(Integer.MIN_VALUE);
-
         long begin = System.currentTimeMillis();
         ResultSet resultSet = statement.executeQuery();
 

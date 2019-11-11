@@ -70,7 +70,10 @@ public class AccountServiceImpl extends ServiceImpl<AccountDao, AccountDO> imple
     public ResponseEntity<FileSystemResource> export() {
         String fileName = "用户数据";
         ExcelResultHandler resultHandler = ExcelResultHandler.create(new AccountConverter(fileName));
-        baseMapper.export(resultHandler);
+        //baseMapper.export(resultHandler);
+        List<AccountDto> accountDtoList = baseMapper.export();
+        resultHandler.setDataCache(accountDtoList);
+        resultHandler.handlerData();
         return resultHandler.get();
     }
 }
