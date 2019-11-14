@@ -66,15 +66,18 @@ public class AccountServiceImpl extends ServiceImpl<AccountDao, AccountDO> imple
         return excelData;
     }
 
+    /**
+     * //        List<AccountDto> accountDtoList = baseMapper.export();
+     * //        resultHandler.setDataCache(accountDtoList);
+     * //        resultHandler.handlerData();
+     * //        resultHandler.clearDataCache();
+     * @return
+     */
     @Override
     public ResponseEntity<FileSystemResource> export() {
         String fileName = "用户数据";
         ExcelResultHandler resultHandler = ExcelResultHandler.create(new AccountConverter(fileName));
-//        baseMapper.export(resultHandler);
-        List<AccountDto> accountDtoList = baseMapper.export();
-        resultHandler.setDataCache(accountDtoList);
-        resultHandler.handlerData();
-        resultHandler.clearDataCache();
+        baseMapper.export(resultHandler);
         return resultHandler.get();
     }
 }
