@@ -56,6 +56,7 @@ public class QueryCompare {
 
     /**
      * 游标查询
+     * ResultSetImpl getResultSet
      * @throws SQLException
      */
     public static void selectStreamWithUseCursorFetch() throws SQLException{
@@ -79,7 +80,7 @@ public class QueryCompare {
 
     public static void main(String[] args) throws SQLException {
 //        selectNormal();
-        selectStream();
-//        selectStreamWithUseCursorFetch();
+//        selectStream();
+        selectStreamWithUseCursorFetch();
     }
 }

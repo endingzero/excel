@@ -27,6 +27,11 @@ public class ExcelResultHandler<T> implements ResultHandler<T>, Supplier<Respons
         this.dataCache = dataCache;
     }
 
+    public void clearDataCache() {
+        dataCache.clear();
+    }
+
+
     private List<T> dataCache;
 
     private ExcelDataConverter<T> dataConverter;
